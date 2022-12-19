@@ -48,7 +48,9 @@ export const LoginPage = () => {
 
   return (
     <AuthLayout>
-      <form onSubmit={onSubmit}>
+      <form onSubmit={onSubmit} className='animate__animated animate__fadeIn animate__faster'>
+        
+      <Typography variant='h4' textAlign='center' sx={{mb: 4}}>Login</Typography>
         <Grid container spacing={2}>
           <Grid item xs={12}>
             <TextField

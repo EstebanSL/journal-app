@@ -41,7 +41,7 @@ export const RegisterPage = () => {
 
   return (
     <AuthLayout>
-      <form onSubmit={onSubmit}>
+      <form onSubmit={onSubmit} className='animate__animated animate__fadeIn animate__faster'>
 
         <Typography variant='h4' textAlign='center' sx={{mb: 4}}>Register</Typography>
         <Grid container spacing={2}>

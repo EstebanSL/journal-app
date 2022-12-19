@@ -1,4 +1,3 @@
-import { signInWithEmailAndPassword } from "firebase/auth"
 import { FirebaseAuth } from "../../firebase/config"
 import { EmailAndPasswordSignIn, signInWithGoogle, signUpWithEmailAndPassword } from "../../firebase/providers"
 import { checkingCredentials, login, logout } from "./AuthSlice"
@@ -39,5 +38,12 @@ export const startCreatingUserWithEmailAndPassword = ({ username, password, emai
 
     dispatch(login(result))
 
+  }
+}
+
+export const startLogout = () => {
+  return async (dispatch) => {
+    await FirebaseAuth.signOut()
+    dispatch(logout())
   }
 }
