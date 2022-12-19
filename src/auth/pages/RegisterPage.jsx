@@ -1,7 +1,7 @@
 import { Google } from '@mui/icons-material'
-import { Button, Grid, Link, TextField, Typography } from '@mui/material'
-import React, { useState } from 'react'
-import { useDispatch } from 'react-redux'
+import { Alert, Button, Grid, Link, TextField, Typography } from '@mui/material'
+import React, { useMemo, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import { Link as RouterLink } from 'react-router-dom'
 import { useForm } from '../../hooks/UseForm'
 import { startCreatingUserWithEmailAndPassword } from '../../store/auth'
@@ -22,6 +22,10 @@ const formValidations = {
 export const RegisterPage = () => {
 
   const dispatch = useDispatch()
+
+  const { status, errorMessage } = useSelector(state => state.auth)
+
+  const isCheckingAuthentication = useMemo(() => status === 'checking', [status])
 
   const [formSubmited, setFormSubmited] = useState(false)
 
@@ -89,21 +93,17 @@ export const RegisterPage = () => {
           container
           spacing={2}
           sx={{ marginY: 2, display: 'flex', alignItems: 'center' }}>
-          <Grid item xs={12}>
-            <Button variant='contained' fullWidth type='submit'>Login</Button>
+             <Grid item xs={12} display={ !!errorMessage ? '' : 'none'}>
+              <Alert severity='error'>{ errorMessage }</Alert>
           </Grid>
-
           <Grid item xs={12}>
-            <Button variant='contained' fullWidth sx={{ backgroundColor: 'secondary.main' }}>
-              <Google />
-              <Typography sx={{ ml: 2 }}>Register with Google</Typography>
-            </Button>
+            <Button variant='contained' fullWidth type='submit' disabled={isCheckingAuthentication}>Create account</Button>
           </Grid>
         </Grid>
 
         <Grid container direction='row' justifyContent='end'>
           <Typography sx={{ mr: 2 }}>Already have an account?</Typography>
-          <Link component={RouterLink} color='inherit' to='/auth/register'>Login</Link>
+          <Link component={RouterLink} color='inherit' to='/auth/login'>Login</Link>
         </Grid>
 
       </form>
