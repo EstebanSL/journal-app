@@ -16,6 +16,11 @@ export const useForm = (initialForm = {}, formValidations = {}) => {
   }, [formValidation])
 
 
+  /**
+   * [onInputChange]
+   * @description Function that updates the form value when input changes
+   * @param {*} target
+   */
   const onInputChange = ({ target }) => {
     const { name, value } = target;
     setFormState({
@@ -24,16 +29,23 @@ export const useForm = (initialForm = {}, formValidations = {}) => {
     });
   }
 
+  /**
+   * [onResetForm]
+   * @description Function that reset the form to the initial state
+   */
   const onResetForm = () => {
     setFormState(initialForm);
   }
 
+  /**
+   * [createValidators]
+   * @description Function that creates the validators for each form element
+   */
   const createValidators = () => {
     const formCheckedValues = {}
     for (const formField of Object.keys(formValidations)) {
 
       const [fn, errorMessage] = formValidations[formField]
-
 
       formCheckedValues[`${formField}Valid`] = fn(formState[formField]) ? null : errorMessage
     }

@@ -7,6 +7,9 @@ import { CheckingAuth } from '../ui'
 
 export const AppRouter = () => {
 
+  /**
+   * Varaible that stores the authentication status of the user
+   */
   const status = useCheckAuth()
 
   if (status === 'checking') {

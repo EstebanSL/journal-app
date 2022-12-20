@@ -9,13 +9,25 @@ import { Link as RouterLink } from 'react-router-dom'
 
 //Custom components imports
 import { AuthLayout } from '../layouts/AuthLayout'
-import { chekingAuthentication, startEmailAndPasswordSignIn, startGoogleSignIn } from '../../store/auth'
+import { startEmailAndPasswordSignIn, startGoogleSignIn } from '../../store/auth'
 import { useForm } from '../../hooks/UseForm'
 
-//UI imports
+//Material UI imports
 import { Alert, Button, Grid, Link, TextField, Typography } from '@mui/material'
 import { Google } from '@mui/icons-material'
 
+
+/**
+ * Object that store the initial state of the login form
+ */
+const InitialFormData = {
+  email: '',
+  password: ''
+}
+
+/**
+ * Object that stores the validators and error mesages for each login form input
+ */
 const formValidations = {
   email: [(value) => value.includes('@'), 'Email must be valid'],
   password: [(value) => value.length >= 6, 'Password must be at least 6 characters']
@@ -23,26 +35,48 @@ const formValidations = {
 
 export const LoginPage = () => {
 
-  const dispatch = useDispatch()
-
+  /** 
+   * Variable that defines if the form has been submited 
+   */
   const [formSubmited, setFormSubmited] = useState(false)
-
+  
+  /** 
+   * Variables that stores the status and errorMessage from the app state
+   */
   const { status, errorMessage } = useSelector(state => state.auth)
 
-  const { email, password, onInputChange, formState, isFormValid, passwordValid, emailValid } = useForm({
-    email: '',
-    password: ''
-  }, formValidations)
+  /** 
+   * Variables and function from useForm custom hook to handle login form 
+  */
+  const { email, password, onInputChange, formState, isFormValid, passwordValid, emailValid } 
+  = useForm(InitialFormData, formValidations)
+  
+  /**
+   * Redux variable to dispatch actions
+   */
+  const dispatch = useDispatch()
 
+  /**
+   * Variable that defines if the user is been authenticated
+   */
   const isAthenticating = useMemo( () => status === 'checking', [status])
 
+  /**
+   * [onSubmit]
+   * @description Function that submit the form information if its valid to log via email-password
+   * @param {event} form event 
+   */
   const onSubmit = (event) => {
     event.preventDefault()
     setFormSubmited(true);
     isFormValid && dispatch(startEmailAndPasswordSignIn(formState))
   }
 
-  const onGoogleSignIn = (event) => {
+  /**
+   * [onGoogleSignIn]
+   * @description Function that log the user throught Google
+   */
+  const onGoogleSignIn = () => {
     dispatch(startGoogleSignIn())
   }
 

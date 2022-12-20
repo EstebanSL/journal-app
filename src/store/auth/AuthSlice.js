@@ -37,5 +37,4 @@ export const AuthSlice = createSlice({
   }
 });
 
-
 export const { logout, login, checkingCredentials } = AuthSlice.actions;

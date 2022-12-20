@@ -5,9 +5,16 @@ import { useDispatch } from 'react-redux'
 import { startLogout } from '../../store/auth'
 
 export const NavBar = ({ drawerWidth }) => {
-
+ 
+  /**
+   * Redux variable to dispatch actions
+   */
   const dispatch = useDispatch()
 
+  /**
+   * [onLogout]
+   * @description Method that call the action to logout
+   */
   const onLogout = () => {
     dispatch(startLogout())
   }

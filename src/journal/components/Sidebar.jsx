@@ -5,6 +5,9 @@ import { useSelector } from 'react-redux'
 
 export const Sidebar = ({ drawerWidth }) => {
 
+   /** 
+   * Variables that stores the display name from the app state
+   */
   const { displayName } = useSelector(state => state.auth)
 
   return (

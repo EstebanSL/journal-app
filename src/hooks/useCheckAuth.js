@@ -5,7 +5,16 @@ import { FirebaseAuth } from "../firebase/config"
 import { login, logout } from "../store/auth"
 
 export const useCheckAuth = () => {
+
+ 
+  /** 
+   * Variables that stores the status and errorMessage from the app state
+   */
   const { status } = useSelector((state) => state.auth)
+
+   /**
+   * Redux variable to dispatch actions
+   */
   const dispatch = useDispatch()
 
   useEffect(() => {
