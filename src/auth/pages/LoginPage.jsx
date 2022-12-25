@@ -9,7 +9,7 @@ import { Link as RouterLink } from 'react-router-dom'
 
 //Custom components imports
 import { AuthLayout } from '../layouts/AuthLayout'
-import { startEmailAndPasswordSignIn, startGoogleSignIn } from '../../store/auth'
+import { resetErrorMessage, startEmailAndPasswordSignIn, startGoogleSignIn } from '../../store/auth'
 import { useForm } from '../../hooks/UseForm'
 
 //Material UI imports
@@ -80,6 +80,10 @@ export const LoginPage = () => {
     dispatch(startGoogleSignIn())
   }
 
+  const onResetErrorMessage = () => {
+    dispatch(resetErrorMessage())
+  }
+
   return (
     <AuthLayout>
       <form onSubmit={onSubmit} className='animate__animated animate__fadeIn animate__faster'>
@@ -135,7 +139,7 @@ export const LoginPage = () => {
         </Grid>
 
         <Grid container direction='row' justifyContent='end'>
-          <Link component={RouterLink} color='inherit' to='/auth/register'>Create account</Link>
+          <Link component={RouterLink} color='inherit' to='/auth/register' onClick={onResetErrorMessage}>Create account</Link>
         </Grid>
 
       </form>

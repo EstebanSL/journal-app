@@ -30,10 +30,13 @@ export const AuthSlice = createSlice({
       state.photoURL = null
       state.errorMessage = payload?.errorMessage
     },
+    resetErrorMessage: (state) => {
+      state.errorMessage = ''
+    },
     checkingCredentials: (state) => {
       state.status = 'checking'
     }
   }
 });
 
-export const { logout, login, checkingCredentials } = AuthSlice.actions;
+export const { logout, login, checkingCredentials, resetErrorMessage } = AuthSlice.actions;

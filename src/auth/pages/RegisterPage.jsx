@@ -4,7 +4,7 @@ import React, { useMemo, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link as RouterLink } from 'react-router-dom'
 import { useForm } from '../../hooks/UseForm'
-import { startCreatingUserWithEmailAndPassword } from '../../store/auth'
+import { resetErrorMessage, startCreatingUserWithEmailAndPassword } from '../../store/auth'
 import { AuthLayout } from '../layouts/AuthLayout'
 
 const InitialFormData = {
@@ -57,6 +57,11 @@ export const RegisterPage = () => {
     console.log(formState)
     isFormValid && dispatch(startCreatingUserWithEmailAndPassword(formState))
   }
+
+  const onResetErrorMessage = () => {
+    dispatch(resetErrorMessage())
+  }
+
 
   return (
     <AuthLayout>
@@ -122,7 +127,7 @@ export const RegisterPage = () => {
 
         <Grid container direction='row' justifyContent='end'>
           <Typography sx={{ mr: 2 }}>Already have an account?</Typography>
-          <Link component={RouterLink} color='inherit' to='/auth/login'>Login</Link>
+          <Link component={RouterLink} color='inherit' to='/auth/login' onClick={onResetErrorMessage}>Login</Link>
         </Grid>
 
       </form>
