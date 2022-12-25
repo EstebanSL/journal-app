@@ -53,8 +53,6 @@ export const startCreatingUserWithEmailAndPassword = ({ username, password, emai
     dispatch(checkingCredentials())
     const result = await signUpWithEmailAndPassword( { username, password, email } )
 
-    console.log(result)
-
     if (!result.ok) return dispatch(logout(result))
 
     dispatch(login(result))

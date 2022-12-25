@@ -68,7 +68,6 @@ export const signUpWithEmailAndPassword = async ({ email, password, username }) 
  */
 export const EmailAndPasswordSignIn = async ({ email: emailAccess, password }) => {
   try {
-    console.log(emailAccess, password)
     const { user } = await signInWithEmailAndPassword(FirebaseAuth, emailAccess, password)
     const { displayName, email, photoURL, uid } = user
 
