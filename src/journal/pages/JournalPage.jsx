@@ -17,7 +17,7 @@ export const JournalPage = () => {
     dispatch(startNewNote())
   }
 
-  
+  console.log(activeNote)
 
   return (
     <JournalLayout>

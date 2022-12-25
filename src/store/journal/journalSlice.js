@@ -24,6 +24,7 @@ export const journalSlice = createSlice({
       state.savedMessage = `Note created successfully`
     },
     setActiveNote: (state, action) => {
+      console.log(action.payload);
       state.activeNote = action.payload
       state.isSaving = false;
       state.savedMessage = ''
@@ -54,6 +55,7 @@ export const journalSlice = createSlice({
     },
     deleteNoteById: (state, action) => {
       state.activeNote = null
+      state.isSaving = false
       state.notes = state.notes.filter(note => note.id !== action.payload)
     }
   }
